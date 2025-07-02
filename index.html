@@ -104,10 +104,9 @@
     <form id="quiz-form">
       <h2>Réponds de 1 (pas du tout vrai) à 5 (tout à fait vrai)</h2>
 
+      <!-- Questions -->
       <div class="question">1. Je me sens à l’aise pour parler d’un produit, même à quelqu’un que je connais peu.
-        <div class="scale-labels">
-          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-        </div>
+        <div class="scale-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
         <div class="scale">
           <input type="radio" name="q1" value="1" required>
           <input type="radio" name="q1" value="2">
@@ -118,9 +117,7 @@
       </div>
 
       <div class="question">2. J’adapte facilement mon discours selon la personne que j’ai en face de moi.
-        <div class="scale-labels">
-          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-        </div>
+        <div class="scale-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
         <div class="scale">
           <input type="radio" name="q2" value="1" required>
           <input type="radio" name="q2" value="2">
@@ -131,9 +128,7 @@
       </div>
 
       <div class="question">3. Je me fixe des objectifs quand je vends (chiffre, nombre de ventes, etc.).
-        <div class="scale-labels">
-          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-        </div>
+        <div class="scale-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
         <div class="scale">
           <input type="radio" name="q3" value="1" required>
           <input type="radio" name="q3" value="2">
@@ -144,9 +139,7 @@
       </div>
 
       <div class="question">4. Je relance mes clientes après une présentation ou une discussion.
-        <div class="scale-labels">
-          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-        </div>
+        <div class="scale-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
         <div class="scale">
           <input type="radio" name="q4" value="1" required>
           <input type="radio" name="q4" value="2">
@@ -157,9 +150,7 @@
       </div>
 
       <div class="question">5. Je prends plaisir à "pitcher" un produit de manière convaincante.
-        <div class="scale-labels">
-          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-        </div>
+        <div class="scale-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
         <div class="scale">
           <input type="radio" name="q5" value="1" required>
           <input type="radio" name="q5" value="2">
@@ -170,9 +161,7 @@
       </div>
 
       <div class="question">6. Je prépare mes ventes à l’avance : supports, argumentaire, outils...
-        <div class="scale-labels">
-          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-        </div>
+        <div class="scale-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
         <div class="scale">
           <input type="radio" name="q6" value="1" required>
           <input type="radio" name="q6" value="2">
@@ -183,9 +172,7 @@
       </div>
 
       <div class="question">7. Je préfère vendre en mode spontané, au feeling, selon l’ambiance.
-        <div class="scale-labels">
-          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-        </div>
+        <div class="scale-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
         <div class="scale">
           <input type="radio" name="q7" value="1" required>
           <input type="radio" name="q7" value="2">
@@ -196,9 +183,7 @@
       </div>
 
       <div class="question">8. Je m'appuie souvent sur le visuel ou la mise en scène pour convaincre.
-        <div class="scale-labels">
-          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-        </div>
+        <div class="scale-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
         <div class="scale">
           <input type="radio" name="q8" value="1" required>
           <input type="radio" name="q8" value="2">
@@ -220,19 +205,18 @@
       const form = e.target;
       let score = 0;
       for (let i = 1; i <= 8; i++) {
-        const val = parseInt(form["q" + i].value);
-        score += val;
+        score += parseInt(form["q" + i].value);
       }
 
       let resultText = "";
       if (score <= 17) {
-        resultText = "<h3>💡 La Discrète Créative</h3><p>Tu ne cours pas après la vente à tout prix, mais tu as souvent une idée originale, une jolie mise en scène ou une phrase qui fait mouche… Tu observes, tu ressens, tu proposes avec délicatesse.</p>";
+        resultText = "<h3>💡 La Discrète Créative</h3><p>Tu ne cours pas après la vente à tout prix, mais tu as souvent une idée originale, une jolie mise en scène ou une phrase qui fait mouche…</p><p>🎁 Point fort : ton côté artistique, rassurant, non oppressant<br>🌱 À travailler : oser plus souvent parler de ton offre, même si ce n’est 'pas le bon moment'</p>";
       } else if (score <= 25) {
-        resultText = "<h3>💛 L’Instinctive Naturelle</h3><p>Tu es spontanée, sympa, et ça plaît ! Ton style, c’est la conversation tranquille, la recommandation fluide, comme entre copines.</p>";
+        resultText = "<h3>💛 L’Instinctive Naturelle</h3><p>Tu es spontanée, sympa, et ça plaît ! Ton style, c’est la conversation tranquille, la recommandation fluide, comme entre copines.</p><p>🎁 Point fort : ta capacité à vendre sans 'forcer'<br>🌱 À travailler : structurer un peu plus ton approche pour passer au niveau supérieur</p>";
       } else if (score <= 33) {
-        resultText = "<h3>💥 L’Enthousiaste Persuasive</h3><p>Tu transmets ton énergie et ta passion avec sincérité. Tu es convaincante, motivée, et moteur dans un groupe.</p>";
+        resultText = "<h3>💥 L’Enthousiaste Persuasive</h3><p>Tu transmets ton énergie et ta passion avec sincérité. Tu es convaincante, motivée, et souvent moteur dans un groupe.</p><p>🎁 Point fort : ton énergie communicative et ton aisance relationnelle<br>🌱 À travailler : ne pas oublier d’écouter avant de convaincre, pour mieux cerner les besoins</p>";
       } else {
-        resultText = "<h3>🔥 La Stratège Ambitieuse</h3><p>Tu es focus, organisée, et clairement une pro de la vente. Tu pourrais vendre de la glace à un pingouin !</p>";
+        resultText = "<h3>🔥 La Stratège Ambitieuse</h3><p>Tu es focus, organisée, et clairement une pro de la vente. Tu pourrais vendre de la glace à un pingouin !</p><p>🎁 Point fort : ton efficacité, ta régularité, ta capacité à performer<br>🌱 À travailler : garder un ton chaleureux, éviter le “trop commercial” qui peut refroidir certaines clientes</p>";
       }
 
       document.getElementById("result").innerHTML = resultText;
