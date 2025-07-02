@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Test – Chef de Gang</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff8f7;
+      margin: 0;
+      padding: 0 20px;
+      color: #600000;
+    }
+    header {
+      text-align: center;
+      margin-top: 110px;
+    }
+    .logo {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      z-index: 1000;
+    }
+    h1 {
+      font-size: 2em;
+      margin: 20px 0 5px;
+      color: #600000;
+    }
+    h2 {
+      font-weight: normal;
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .question {
+      margin-bottom: 25px;
+    }
+    .legend {
+      font-size: 0.9em;
+      color: #444;
+      margin-bottom: 6px;
+    }
+    .scale {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px 0 10px;
+      font-size: 0.85em;
+      color: #600000;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: #b30000;
+    }
+    button {
+      background-color: #b30000;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 20px;
+      display: block;
+    }
+    #result {
+      margin-top: 40px;
+      background-color: #ffeaea;
+      border-left: 6px solid #b30000;
+      padding: 20px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="logo_MAG_horizonal.png" alt="Logo MAGGY" class="logo"/>
+
+  <header>
+    <h1>Instinct, stratégie ou feeling : <br>quelle Chef de Gang sommeille en toi ?</h1>
+    <h2>Réponds à chaque affirmation de 1 (pas du tout) à 5 (tout à fait)</h2>
+  </header>
+
+  <form id="quizForm">
+    <div class="question">
+      <label>1. Je me sens à l’aise pour parler d’un produit, même à quelqu’un que je connais peu.</label>
+      <div class="scale"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+      <input type="range" name="q1" min="1" max="5" required>
+    </div>
+
+    <div class="question">
+      <label>2. J’adapte facilement mon discours selon la personne que j’ai en face de moi.</label>
+      <div class="scale"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+      <input type="range" name="q2" min="1" max="5" required>
+    </div>
+
+    <div class="question">
+      <label>3. Je me fixe des objectifs quand je vends (chiffre, nombre de ventes, etc.).</label>
+      <div class="scale"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+      <input type="range" name="q3" min="1" max="5" required>
+    </div>
+
+    <div class="question">
+      <label>4. Je relance mes clientes après une présentation ou une discussion.</label>
+      <div class="scale"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+      <input type="range" name="q4" min="1" max="5" required>
+    </div>
+
+    <div class="question">
+      <label>5. Je prends plaisir à "pitcher" un produit de manière convaincante.</label>
+      <div class="scale"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+      <input type="range" name="q5" min="1" max="5" required>
+    </div>
+
+    <div class="question">
+      <label>6. Je prépare mes ventes à l’avance : supports, argumentaire, outils...</label>
+      <div class="scale"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+      <input type="range" name="q6" min="1" max="5" required>
+    </div>
+
+    <div class="question">
+      <label>7. Je préfère vendre en mode spontané, au feeling, selon l’ambiance.</label>
+      <div class="scale"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+      <input type="range" name="q7" min="1" max="5" required>
+    </div>
+
+    <div class="question">
+      <label>8. Je m'appuie souvent sur le visuel ou la mise en scène pour convaincre.</label>
+      <div class="scale"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+      <input type="range" name="q8" min="1" max="5" required>
+    </div>
+
+    <button type="submit">Voir mon profil</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    const form = document.getElementById("quizForm");
+    const result = document.getElementById("result");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      let total = 0;
+      const values = Array.from(form.elements)
+        .filter(el => el.type === "range")
+        .map(el => parseInt(el.value));
+
+      total = values.reduce((a, b) => a + b, 0);
+
+      let profileText = "";
+
+      if (total <= 17) {
+        profileText = `🔥 La Discrète Créative (${total} points)
+
+Tu ne cours pas après la vente à tout prix, mais tu as souvent une idée originale, une jolie mise en scène ou une phrase qui fait mouche…
+Tu observes, tu ressens, tu proposes avec délicatesse. Tu as une approche douce, rassurante, souvent très appréciée des clientes sensibles ou hésitantes.
+🎁 Point fort : ton côté artistique, rassurant, non oppressant
+🌱 À travailler : oser plus souvent parler de ton offre, même si ce n’est "pas le bon moment"`;
+      } else if (total <= 25) {
+        profileText = `💛 L’Instinctive Naturelle (${total} points)
+
+Tu ne prépares pas grand-chose, mais tu arrives toujours à vendre… Pourquoi ? Parce que tu sais y faire, sans y penser.
+Tu es spontanée, sympa, et ça plaît ! Ton style, c’est la conversation tranquille, la recommandation fluide, comme entre copines.
+🎁 Point fort : ta capacité à vendre sans "forcer"
+🌱 À travailler : structurer un peu plus ton approche pour passer au niveau supérieur`;
+      } else if (total <= 33) {
+        profileText = `💥 L’Enthousiaste Persuasive (${total} points)
+
+Quand tu parles d’un produit, on a envie de l’acheter rien que pour te faire plaisir 😄
+Tu transmets ton énergie et ta passion avec sincérité. Tu es convaincante, motivée, et souvent moteur dans un groupe.
+🎁 Point fort : ton énergie communicative et ton aisance relationnelle
+🌱 À travailler : ne pas oublier d’écouter avant de convaincre, pour mieux cerner les besoins`;
+      } else {
+        profileText = `🔥 La Stratège Ambitieuse (${total} points)
+
+Tu es focus, organisée, et tu as clairement un objectif en tête. Tu prépares, tu relances, tu structures : tu es une pro de la vente.
+Tu pourrais vendre de la glace à un pingouin, mais heureusement, tu as aussi un bon cœur 😉 Tu es prête à grimper les marches du succès !
+🎁 Point fort : ton efficacité, ta régularité, ta capacité à performer
+🌱 À travailler : garder un ton chaleureux, éviter le “trop commercial” qui peut refroidir certaines clientes`;
+      }
+
+      result.innerText = profileText;
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    });
+  </script>
+
+</body>
+</html>
